@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(git push:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)",
+      "Bash(git commit --no-verify:*)",
+      "Bash(rm -rf:*)",
+      "Edit(data/**)",
+      "Edit(.e2e-data/**)",
+      "Edit(bun.lock)",
+      "Read(.env*)"
+    ],
+    "ask": [
+      "Bash(bun add:*)",
+      "Bash(bun remove:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)"
+    ]
+  }
+}

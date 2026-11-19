@@ -14,3 +14,7 @@ AI 답변을 스트리밍으로 받는 채팅 앱(웹과 API 서버)의 설계 �
 | ------ | --------------- |
 | [career-radar](https://github.com/changbaebang/career-radar) | `node:sqlite`와 `user_version` 마이그레이션, 루프백 Host 검사, ADR 형식 |
 | [agent-skill-garden](https://github.com/changbaebang/agent-skill-garden) | 변경 권한과 검증 정책, 단계마다 쓰는 스킬 |
+
+## 앱
+
+준비 중이다. 17단계에서 채운다.
