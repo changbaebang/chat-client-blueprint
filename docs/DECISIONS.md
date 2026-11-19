@@ -17,6 +17,7 @@
 - **결정:** 설치, 스크립트, TypeScript 실행, 모듈 테스트를 Bun 1.4로 한다.
 - **결과:** Node를 따로 설치하지 않는다. 스크립트 안의 환경 변수와 작은따옴표가 Windows에서 설정 없이 된다(루트 `TASKS.md` 3.2절).
 - **대안:** Node와 pnpm, tsx, Vitest. 처음 판의 선택이었다. 잰 결과 pnpm 12는 Windows에서 설정 두 가지가 더 필요했다. Bun으로 이 PC에서 모든 층을 돌려 봤다.
+- **확인(2026-11-19, 02단계):** 이 PC의 Bun은 1.4.2다(`packageManager`는 `bun@1.4.4`). `bun install`이 의존성 열 개를 설치하고 종료 코드 0이었다. 막힌 lifecycle 스크립트는 없었다. `bun test`, Playwright(Chromium), `vite build`가 모두 Bun으로 돌았다.
 
 ## ADR-003: TypeScript 7.0.2
 
@@ -25,6 +26,7 @@
 - **결정:** TypeScript 7.0.2를 정확히 고정해 쓴다.
 - **결과:** typescript-eslint의 peer 범위(`<6.1.0`)에 묶이지 않는다.
 - **대안:** 6.0. typescript-eslint를 쓸 때만 필요했다.
+- **확인(2026-11-19, 02단계):** 설치된 `tsc`는 7.0.2다. 02단계의 `tsconfig.json` 옵션 그대로 `tsc --noEmit`이 고칠 것 없이 통과했다.
 
 ## ADR-004: 사용자와 목록은 RDB, 채팅 내용은 문서 저장소
 
@@ -121,6 +123,7 @@
 - **결정:** 의존성은 [DESIGN 2.2절](DESIGN.md#22-의존성과-스크립트)의 열 개로 정확히 고정한다(`^` 없음). 더하려면 ADR을 남긴다.
 - **결과:** 쓰지 않는 것과 이유는 DESIGN 2.3절의 표에 있다.
 - **대안:** [DESIGN 2.3절](DESIGN.md#23-쓰지-않는-것)의 표.
+- **확인(2026-11-19, 02단계):** `npm view`로 열 개 버전이 모두 있음을 봤고, 설치된 버전이 DESIGN 2.2절과 같다: react 19.3.1, react-dom 19.3.1, @fontsource-variable/geist 5.3.0, vite 8.3.8, @vitejs/plugin-react 6.3.0, typescript 7.0.2, @playwright/test 1.65.1, @types/node 26.6.6, @types/react 19.3.0, @types/react-dom 19.3.0.
 
 ## ADR-016: 서버는 Bun 전용 API를 쓰지 않는다
 
