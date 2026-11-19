@@ -6,5 +6,6 @@ import { chatApi } from './server/plugin'
 export default defineConfig({
   plugins: [react(), chatApi()],
   ...(process.env.E2E_CACHE_DIR ? { cacheDir: process.env.E2E_CACHE_DIR } : {}),
-  server: { port: 5173 },
+  // strictPort: if 5173 is taken, fail instead of silently moving to 5174.
+  server: { port: 5173, strictPort: true },
 })
