@@ -74,7 +74,7 @@
 | API를 붙이는 곳 | Vite 플러그인(`configureServer`, `configurePreviewServer`) | 프로세스 하나, 웹과 같은 출처라 프록시와 CORS가 없다 |
 | HTTP | 직접 만든 작은 라우터(`node:http`의 `req`, `res`) | 경로가 열 개 남짓이라 라이브러리 없이 충분하다 |
 | 계약 | 손으로 쓴 TypeScript 타입(`shared/contract.ts`)과 서버의 검증 함수 | 런타임 의존이 없다. `docs/API.md`를 손으로 옮긴다 |
-| RDB | SQLite, `node:sqlite` | 파일 하나이고 설치가 없다. 잰 결과, Bun 1.4.2에서 경고 없이 SQLite 3.53.2로 돌고, 행 값 비교가 인덱스 범위를 쓴다 |
+| RDB | SQLite, `node:sqlite` | 파일 하나이고 설치가 없다. 2026-11-18에 Bun 1.4.2로 잰 결과, 경고 없이 SQLite 3.53.2로 돌고, 행 값 비교가 인덱스 범위를 쓴다. 2026-11-19에 Bun 1.4.4로 올린 뒤에는 경고 없이 3.53.4다(ADR-002) |
 | 문서 저장소 | 직접 만든 JSON 문서 저장소 | 채팅 하나가 파일 하나다. 잠금, 원자적 쓰기, 버전 조건부 쓰기를 직접 보여 줄 만큼 작다([5.7절](#57-windows와-파일-저장)) |
 | Markdown | 직접 만든 렌더러(`src/lib/markdown.tsx`) | 답변에 쓰는 문법만 다룬다. 답변은 조각으로 와서 그리는 도중의 글이 늘 불완전하다. 그런 입력에서도 무한 루프 없이 끝나야 한다(LIB-8) |
 | 언어 | TypeScript 7.0.2 | 린터가 없어 typescript-eslint의 peer 범위(`<6.1.0`)에 묶이지 않는다 |

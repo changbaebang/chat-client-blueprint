@@ -122,7 +122,10 @@ describe('the parts that are allowed', () => {
       }),
     ).toEqual(['src/lib/a.ts LIB-1 src/api/client', 'src/lib/a.ts LIB-1 src/state/user'])
   })
+})
 
+// Lexer details. The first two once let violations pass silently or shifted line numbers.
+describe('scanner details', () => {
   test('a division by a number is not read as a regex, so later uses are still seen', () => {
     const vs = checkImports(
       repo({
