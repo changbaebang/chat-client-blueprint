@@ -19,7 +19,7 @@
 - **결정:** 설치, 스크립트, TypeScript 실행, 모듈 테스트를 Bun 1.4로 한다.
 - **결과:** Node를 따로 설치하지 않는다. 스크립트 안의 환경 변수와 작은따옴표가 Windows에서 설정 없이 된다(루트 `TASKS.md` 3.2절).
 - **대안:** Node와 pnpm, tsx, Vitest. 처음 판의 선택이었다. 잰 결과 pnpm 12는 Windows에서 설정 두 가지가 더 필요했다. Bun으로 이 PC에서 모든 층을 돌려 봤다.
-- **확인(2026-11-19, 02단계):** 이 PC의 Bun은 1.4.2다(`packageManager`는 `bun@1.4.4`). `bun install`이 의존성 열 개를 설치하고 종료 코드 0이었다. 막힌 lifecycle 스크립트는 없었다. `bun test`, Playwright(Chromium), `vite build`가 모두 Bun으로 돌았다.
+- **확인(2026-11-19, 02단계):** 처음에는 이 PC의 Bun이 1.4.2라 `packageManager`(`bun@1.4.4`)와 달랐다. 이 PC의 Bun은 winget이 아니라 npm 전역 패키지로 설치되어 있어서 `npm install -g bun@1.4.4`로 맞췄다. 1.4.4에서 `bun install`(잠금 파일 바뀜 없음), `bun run check`, `test:smoke`, `test:e2e:build`가 모두 종료 코드 0이었다. 막힌 lifecycle 스크립트는 없었다. `node:sqlite`는 경고 없이 SQLite 3.53.4다.
 
 ## ADR-003: TypeScript 7.0.2
 

@@ -12,7 +12,7 @@
 | ---- | ---- | ------ | ---- | --------- | ---- |
 | 00 | 환경 준비 | 없음 | 반영 | | 파일을 만들지 않는 단계 |
 | 01 | 저장소와 에이전트 규칙 | main | 반영 | d613a8d | 해시는 02단계 브랜치의 첫 커밋에서 채웠다 |
-| 02 | 패키지와 도구 | stage/02-packages | 진행 | | 알려진 한계: `check:imports`는 JSX 글자 속 작은따옴표나 `/`를 그 줄 끝까지 문자열로 읽는다(READING 02). 나중에 볼 것: `tsconfig.json` 하나에 DOM과 node 타입이 함께 있어 `src`의 `process`, `Buffer`를 tsc가 잡지 않는다(03~04단계). `check:css`는 `white` 같은 색 이름을 잡지 않는다(04단계 전에 정함) |
+| 02 | 패키지와 도구 | stage/02-packages | 진행 | | 알려진 한계: `check:imports`는 JSX 글자 속 작은따옴표나 `/`를 그 줄 끝까지 문자열로 읽는다(READING 02). 나중에 볼 것: `tsconfig.json` 하나에 DOM과 node 타입이 함께 있어 `src`의 `process`, `Buffer`를 tsc가 잡지 않는다(03~04단계). `check:css`는 `white` 같은 색 이름을 잡지 않는다(04단계 전에 정함). 00단계 문서는 Bun을 winget으로 설치한다고 가정하지만, 이 PC는 npm 전역 설치였다(00단계 "막히면"에 되돌릴 것) |
 | 03 | 계약 | stage/03-contracts | 대기 | | |
 | 04 | 기초 UI | stage/04-ui-foundation | 대기 | | |
 | 05 | 기초 API | stage/05-server-foundation | 대기 | | |
