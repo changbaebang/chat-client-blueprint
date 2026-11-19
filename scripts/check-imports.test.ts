@@ -123,6 +123,41 @@ describe('the parts that are allowed', () => {
     ).toEqual(['src/lib/a.ts LIB-1 src/api/client', 'src/lib/a.ts LIB-1 src/state/user'])
   })
 
+  test('a division by a number is not read as a regex, so later uses are still seen', () => {
+    const vs = checkImports(
+      repo({
+        'server/lib/format.ts': [
+          'export const line = (n: number) => 100 / n + `',
+          '`',
+          'console.log(line(1))',
+          "export const read = () => Bun.file('x')",
+          '',
+        ].join('\n'),
+      }),
+    )
+    expect(vs.map((v) => `${v.line} ${v.rule} ${v.target}`)).toEqual(['3 SLIB-2 console.', '4 EDGE-2 Bun.'])
+  })
+
+  test('JSX closing tags and an apostrophe in JSX text do not shift line numbers', () => {
+    const vs = checkImports(
+      repo({
+        'src/components/chat/view.tsx': [
+          'export function View() {',
+          '  return (',
+          '    <div>',
+          '      <h1>Title</h1>',
+          "      <p>Don't stop</p>",
+          '    </div>',
+          '  )',
+          '}',
+          "const m = import('../shell/sidebar')",
+          '',
+        ].join('\n'),
+      }),
+    )
+    expect(vs.map((v) => `${v.line} ${v.rule} ${v.target}`)).toEqual(['9 COMP-1 src/components/shell/sidebar'])
+  })
+
   test('the line number points at the import', () => {
     const [v] = checkImports(repo({ 'src/lib/a.ts': "\n\nimport { request } from '../api/client'\n" }))
     expect(v?.line).toBe(3)

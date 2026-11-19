@@ -146,7 +146,9 @@ function resolve(file: string, spec: string): Target | null {
 }
 
 // A small lexer: strings, template literals, comments and regex literals are skipped, so text inside them never counts.
-type Token = { type: 'ident' | 'string' | 'punct'; value: string; line: number }
+// Known limit: in JSX text a lone apostrophe or slash is read as a string or regex up to the end of that line only.
+// The newline itself is never swallowed, so line numbers and later lines stay correct.
+type Token = { type: 'ident' | 'number' | 'string' | 'punct'; value: string; line: number }
 
 function tokenize(text: string): Token[] {
   const tokens: Token[] = []
@@ -156,8 +158,10 @@ function tokenize(text: string): Token[] {
   const regexCanStart = () => {
     const t = last()
     if (!t) return true
-    if (t.type === 'punct') return !')]}'.includes(t.value)
+    // After ) ] } a slash divides. After < it closes a JSX tag (</h1>).
+    if (t.type === 'punct') return !')]}<'.includes(t.value)
     if (t.type === 'ident') return ['return', 'typeof', 'case', 'do', 'else', 'in', 'of', 'new', 'delete', 'void', 'throw', 'await', 'yield'].includes(t.value)
+    // After a number or a string a slash divides.
     return false
   }
   while (i < text.length) {
@@ -185,7 +189,7 @@ function tokenize(text: string): Token[] {
         value += text[i] ?? ''
         i++
       }
-      i++
+      if (text[i] === c) i++ // an unclosed string stops before the newline, which the outer loop counts
       tokens.push({ type: 'string', value, line: start })
     } else if (c === '`') {
       i++
@@ -214,9 +218,15 @@ function tokenize(text: string): Token[] {
         else if (d === '/' && !inClass) break
         i++
       }
-      i++
-      while (/[a-z]/i.test(text[i] ?? '')) i++
+      if (text[i] === '/') {
+        i++
+        while (/[a-z]/i.test(text[i] ?? '')) i++
+      }
       tokens.push({ type: 'string', value: '', line })
+    } else if (/[0-9]/.test(c)) {
+      let value = ''
+      while (i < text.length && /[\w.]/.test(text[i] as string)) value += text[i++]
+      tokens.push({ type: 'number', value, line })
     } else if (/[A-Za-z_$]/.test(c)) {
       let value = ''
       while (i < text.length && /[\w$]/.test(text[i] as string)) value += text[i++]
