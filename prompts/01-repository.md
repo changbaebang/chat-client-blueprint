@@ -54,7 +54,7 @@ DESIGN.md에 없는 규칙을 지어내지 않는다. 필요해 보이는 규칙
    prompts/, 루트의 TASKS.md, docs/DESIGN.md 는 고치지 않는다. README.md 는 끝에 "## 앱" 절만 더한다.
 2. 다음 파일을 만든다.
    - .gitattributes: "* text=auto eol=lf" (DESIGN 2.4절)
-   - .gitignore: node_modules/, dist/, data/, .e2e-data/, test-results/, playwright-report/, *.log, .env*, *.tmp, .claude/skills/, .claude/settings.local.json
+   - .gitignore: node_modules/, dist/, /data/(루트의 데이터 폴더만. 슬래시가 없으면 src/data/ 같은 폴더까지 빠진다), .e2e-data/, test-results/, playwright-report/, *.log, .env*, *.tmp, .claude/skills/, .claude/settings.local.json
    - .editorconfig: utf-8, lf, 들여쓰기 공백 2칸, 파일 끝 줄바꿈
    - AGENTS.md: DESIGN 10.1절의 15개 장. 장마다 짧게 쓰고 DESIGN.md의 절을 링크한다. AGENTS.md 는 루트에 있으니 링크를 루트 기준으로 바꾼다(../prompts/README.md 는 prompts/README.md, 같은 문서 안의 #절 링크는 docs/DESIGN.md#절). 12장의 보고 틀과 14장의 안정 기준은 그대로 옮긴다.
      9장에는 DESIGN 9.2절의 경계 규칙(EDGE-1, EDGE-2)과 9.14절의 절차를 옮기고, 정책 상태 표(폴더, 정책 파일, 상태)를 둔다.

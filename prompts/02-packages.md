@@ -72,7 +72,7 @@ DESIGN 2장, 8장, 9.2절, 11.4절을 읽는다. 앱 기능은 만들지 않는�
      baseURL 은 TEST_PARALLEL_INDEX 로 정한다. reuseExistingServer false. projects chromium, firefox, webkit.
      reporter list 와 html(open never). trace off, screenshot only-on-failure, video off.
      Playwright 의 --workers 로 워커 수를 바꾸지 말라는 주석을 단다(서버 수와 맞지 않는다).
-   - .gitignore 에 dist/, data/, .e2e-data/, test-results/, playwright-report/ 가 있는지 보고 없으면 더한다.
+   - .gitignore 에 dist/, /data/, .e2e-data/, test-results/, playwright-report/ 가 있는지 보고 없으면 더한다.
 3. 검사 스크립트(테스트 먼저)
    - scripts/check-imports.ts: DESIGN 9.2절의 "check:imports의 표"를 그대로 옮긴다. 파일마다 import 와 export from 과 동적 import 를 읽고,
      상대 경로를 저장소 기준 경로로 풀어 표와 맞댄다. Bun. 전역 사용과 서버 코드의 console. 호출도 본다(EDGE-2, SLIB-2).
